@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Location Tracker</title>
+    <style>
+        /* Center everything */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            overflow: hidden;
+        }
+
+        /* Facebook-style logo */
+        .fb-logo {
+            width: 100px;
+            height: 100px;
+            background-color: #1877F2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            transform: scale(1);
+            animation: pop-in 0.8s ease-out;
+            position: relative;
+        }
+
+        .fb-logo::after {
+            content: "f";
+            font-size: 75px; /* Increased size */
+            color: white;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -55%);
+        }
+
+        /* Location box */
+        #location {
+            font-size: 20px;
+            color: #333;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            min-width: 300px;
+            animation: fade-in 1s ease-in-out;
+        }
+
+        /* Loading effect */
+        .loading {
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+
+        /* Animations */
+        @keyframes pop-in {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fb-logo"></div>
+    <p id="location">📍 Getting location<span class="loading">...</span></p>
+
+    <script>
+        function showLocation(position) {
+            const lat = position.coords.latitude.toFixed(6);
+            const lon = position.coords.longitude.toFixed(6);
+            document.getElementById("location").innerHTML = `📍 Latitude: ${lat} <br> 📍 Longitude: ${lon}`;
+        }
+
+        function errorHandler(error) {
+            document.getElementById("location").innerHTML = "⚠️ Location access denied. Enable GPS.";
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showLocation, errorHandler);
+        } else {
+            document.getElementById("location").innerHTML = "❌ Geolocation not supported.";
+        }
+    </script>
+</body>
+</html>
