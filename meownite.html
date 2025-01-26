@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #message {
+            display: none;
+            font-size: 2em;
+            color: green;
+        }
+        #showButton {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #ffcc00;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Click below for a surprise!</h1>
+    <button id="showButton" onclick="showMessage()">Surprise Me!</button>
+
+    <div id="message">
+        <p>🎉 Happy Birthday, [Friend's Name]! 🎉</p>
+        <p>Wishing you an amazing year ahead! 🥳</p>
+    </div>
+
+    <script>
+        function showMessage() {
+            document.getElementById('message').style.display = 'block';
+            document.getElementById('showButton').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
